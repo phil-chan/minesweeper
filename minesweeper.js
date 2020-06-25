@@ -5,7 +5,7 @@ var board = {
   cells: [{
       row: 0,
       col: 0,
-      isMine: true,
+      isMine: false,
       isMarked: false,
       hidden: true,
 
@@ -13,7 +13,7 @@ var board = {
     {
       row: 0,
       col: 1,
-      isMine: false,
+      isMine: true,
       isMarked: false,
       hidden: true,
 
@@ -30,7 +30,7 @@ var board = {
     {
       row: 1,
       col: 0,
-      isMine: true,
+      isMine: false,
       isMarked: false,
       hidden: true,
 
@@ -46,7 +46,7 @@ var board = {
     {
       row: 1,
       col: 2,
-      isMine: true,
+      isMine: false,
       isMarked: false,
       hidden: true,
 
@@ -71,31 +71,34 @@ var board = {
     {
       row: 2,
       col: 2,
-      isMine: false,
+      isMine: true,
       isMarked: false,
       hidden: true,
-
     },
   ]
 };
 
 function startGame() {
   // Don't remove this function call: it makes the game work!
+  cellCounts();
   lib.initBoard();
+}
+
+//Adds surrounding mines property to cells
+function cellCounts() {
   for (var i = 0; i < board.cells.length; i++) {
     board.cells[i].surroundingMines = countSurroundingMines(board.cells[i]);
   }
 }
 
+//Check left click
 document.addEventListener('click', function (event) {
-  if (event.which === 1) {
-    checkForWin;
-    console.log(`Left Click`);
-  }
+  if (event.which === 1) checkForWin();
 })
 
+//Check right click
 document.addEventListener('contextmenu', function (event) {
-  console.log(`Right Click`);
+  checkForWin();
 })
 
 // Define this function to look for a win condition:
@@ -103,21 +106,34 @@ document.addEventListener('contextmenu', function (event) {
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
 function checkForWin() {
-  // You can use this function call to declare a winner (once you've
-  // detected that they've won, that is!)
-  //   lib.displayMessage('You win!')
+  //These are some losing 'flags' since I don't know how to return and break of nested functions
+  var loseCriteria1 = false;
+  var loseCriteria2 = false;
+  //=================================================================================
+  //1. Check if all mines are marked, if not, then player has not won
+  //=================================================================================
   board.cells.forEach(function (cell) {
-    var allMarked = false;
-
-    if (cell.isMine === true && cell.isMarked === true) {
+    if (cell.isMine === true && cell.isMarked === false) {
+      loseCriteria1 = true;
       return;
     }
-
-    if (cell.isMarked === true) {
-
-    }
-
   });
+
+  //=================================================================================
+  //2. Check if all mines are marked and if some non-mine cells are still hidden, if yes, then player has not won
+  //=================================================================================
+  //Filters cells for mines, then returns true if all those mines are marked
+  var allMinesMarked = board.cells.filter(cell => cell.isMine).every(mine => mine.isMarked);
+  //Loops through each cell, tests if all non-mine cells are hidden
+  board.cells.forEach(function (cell) {
+    if (allMinesMarked === true && cell.isMine === false && cell.hidden === true) {
+      loseCriteria2 = true;
+      return;
+    }
+  })
+
+  //check game status
+  if (loseCriteria1 === false && loseCriteria2 === false) lib.displayMessage('You win!'); //winning
 }
 
 // Define this function to count the number of mines around the cell
