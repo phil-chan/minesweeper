@@ -5,7 +5,7 @@ var board = {
   cells: [{
       row: 0,
       col: 0,
-      isMine: false,
+      isMine: true,
       isMarked: false,
       hidden: true,
 
@@ -13,7 +13,7 @@ var board = {
     {
       row: 0,
       col: 1,
-      isMine: true,
+      isMine: false,
       isMarked: false,
       hidden: true,
 
@@ -63,7 +63,7 @@ var board = {
     {
       row: 2,
       col: 1,
-      isMine: false,
+      isMine: true,
       isMarked: false,
       hidden: true,
 
@@ -71,7 +71,7 @@ var board = {
     {
       row: 2,
       col: 2,
-      isMine: true,
+      isMine: false,
       isMarked: false,
       hidden: true,
     },
@@ -101,14 +101,11 @@ document.addEventListener('contextmenu', function (event) {
   checkForWin();
 })
 
-// Define this function to look for a win condition:
-//
-// 1. Are all of the cells that are NOT mines visible?
-// 2. Are all of the mines marked?
 function checkForWin() {
   //These are some losing 'flags' since I don't know how to return and break of nested functions
   var loseCriteria1 = false;
   var loseCriteria2 = false;
+
   //=================================================================================
   //1. Check if all mines are marked, if not, then player has not won
   //=================================================================================
@@ -132,7 +129,6 @@ function checkForWin() {
     }
   })
 
-  //check game status
   if (loseCriteria1 === false && loseCriteria2 === false) lib.displayMessage('You win!'); //winning
 }
 
