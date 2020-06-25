@@ -87,11 +87,15 @@ function startGame() {
   }
 }
 
-document.addEventListener('click', function(e) {
-  if (event.which == 1) {
+document.addEventListener('click', function (event) {
+  if (event.which === 1) {
     checkForWin;
-    console.log(`Clicked`);
+    console.log(`Left Click`);
   }
+})
+
+document.addEventListener('contextmenu', function (event) {
+  console.log(`Right Click`);
 })
 
 // Define this function to look for a win condition:
