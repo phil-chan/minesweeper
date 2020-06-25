@@ -87,12 +87,12 @@ function startGame() {
   }
 }
 
-document.onclick = function (event){
-  if(event.which == 1){
+document.addEventListener('click', function(e) {
+  if (event.which == 1) {
     checkForWin;
-    console.log(`Clicked: ${event.detail}`);
+    console.log(`Clicked`);
   }
-}
+})
 
 // Define this function to look for a win condition:
 //
@@ -102,14 +102,14 @@ function checkForWin() {
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
   //   lib.displayMessage('You win!')
-  board.cells.forEach(function (cell){
+  board.cells.forEach(function (cell) {
     var allMarked = false;
 
-    if(cell.isMine === true && cell.isMarked === true){
+    if (cell.isMine === true && cell.isMarked === true) {
       return;
     }
 
-    if(cell.isMarked === true){
+    if (cell.isMarked === true) {
 
     }
 
@@ -126,9 +126,9 @@ function checkForWin() {
 // them, counting the number of times `cell.isMine` is true.
 function countSurroundingMines(cell) {
   var totalSurroundingMines = 0; //a counter which increases if surrounding cell/s has IsMine: true
-    var surroundingCells = lib.getSurroundingCells(cell.row, cell.col); //stores all surrounding cells
-    surroundingCells.forEach(function (surroundingCell) { //loops through all surrounding cells
-      if (surroundingCell.isMine === true) totalSurroundingMines++; //adds to counter if a surrounding cell is IsMine: true
-    })
+  var surroundingCells = lib.getSurroundingCells(cell.row, cell.col); //stores all surrounding cells
+  surroundingCells.forEach(function (surroundingCell) { //loops through all surrounding cells
+    if (surroundingCell.isMine === true) totalSurroundingMines++; //adds to counter if a surrounding cell is IsMine: true
+  })
   return totalSurroundingMines;
 }
