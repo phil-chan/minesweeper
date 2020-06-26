@@ -2,25 +2,26 @@
 <html>
 
 <head>
-  <title>Minesweeper</title>
-  <link rel="stylesheet" href="minesweeper.css">
-  <script src="lib/tests.js"></script>
-  <script src="lib/lib.js"></script>
-  <script src="minesweeper.js"></script>
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="minesweeper.css">
+    <script src="lib/tests.js"></script>
+    <script src="lib/lib.js"></script>
+    <script src="minesweeper.js"></script>
 </head>
 
 <body>
-  <div id="message"></div>
-  <div id="notes">You win when all mines are flagged and all
-    other cells are revealed.</br>Left click to reveal cell. Right click to flag cell.</br>Bombs spawn at random with at
-    20% chance.
-  </div>
-  <div id="controls">
-    <button onclick="decreaseCells()">less</button>
-    <button onclick="increaseCells()">MORE</button>
-    <button onclick="restartGame()">Reset</button>
-  </div>
-  <div class="board"></div>
+    <div id="message"></div>
+    <div id="notes">You win when all mines are flagged and all
+        other cells are revealed.</br>Left click to reveal cell. Right click to flag cell.</br>Bombs spawn at random
+        with at
+        30% chance.
+    </div>
+    <div id="controls">
+        <button onclick="decreaseCells()">less</button>
+        <button onclick="increaseCells()">MORE</button>
+        <button onclick="restartGame()">Reset</button>
+    </div>
+    <div class="board"></div>
 </body>
 
 </html>
