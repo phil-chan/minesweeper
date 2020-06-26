@@ -2,88 +2,37 @@ document.addEventListener('DOMContentLoaded', startGame)
 
 // Define your `board` object here!
 var board = {
-  cells: [
-    // {
-    //   row: 0,
-    //   col: 0,
-    //   isMine: true,
-    //   isMarked: false,
-    //   hidden: true,
-
-    // },
-    // {
-    //   row: 0,
-    //   col: 1,
-    //   isMine: false,
-    //   isMarked: false,
-    //   hidden: true,
-
-    // },
-    // {
-    //   row: 0,
-    //   col: 2,
-    //   isMine: false,
-    //   isMarked: false,
-    //   hidden: true,
-
-    // },
-
-    // {
-    //   row: 1,
-    //   col: 0,
-    //   isMine: false,
-    //   isMarked: false,
-    //   hidden: true,
-
-    // },
-    // {
-    //   row: 1,
-    //   col: 1,
-    //   isMine: false,
-    //   isMarked: false,
-    //   hidden: true,
-
-    // },
-    // {
-    //   row: 1,
-    //   col: 2,
-    //   isMine: false,
-    //   isMarked: false,
-    //   hidden: true,
-
-    // },
-
-    // {
-    //   row: 2,
-    //   col: 0,
-    //   isMine: false,
-    //   isMarked: false,
-    //   hidden: true,
-
-    // },
-    // {
-    //   row: 2,
-    //   col: 1,
-    //   isMine: true,
-    //   isMarked: false,
-    //   hidden: true,
-
-    // },
-    // {
-    //   row: 2,
-    //   col: 2,
-    //   isMine: false,
-    //   isMarked: false,
-    //   hidden: true,
-    // },
-  ]
+  cells: []
 };
+
+var size = 3;
 
 function startGame() {
   // Don't remove this function call: it makes the game work!
-  createBoard(2, 2, false, false, true);
+  createBoard(false, false, true);
   cellCounts();
   lib.initBoard();
+  console.log("==================BEGIN=================")
+  console.log(board.cells);
+}
+
+function restartGame() {
+  board = {cells:[]};
+  //NEED TO CLEAR THE DRAWN CELLS SOMEHOW
+  console.log("==================RESTARTED=================")
+  startGame();
+}
+
+function increaseCells() {
+  console.log(`Prev Size:${size}, New Size:${++size}`)
+  console.log(board.cells);
+  restartGame();
+}
+
+function decreaseCells() {
+  console.log(`Prev Size:${size}, New Size:${--size}`)
+  console.log(board.cells);
+  restartGame();
 }
 
 //Adds surrounding mines property to cells
@@ -94,9 +43,7 @@ function cellCounts() {
 }
 
 //Creates board
-function createBoard(row, col, isMine, isMarked, hidden) {
-  var size = 3;
-
+function createBoard(isMine, isMarked, hidden) {
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
       let cell = {
@@ -122,34 +69,12 @@ document.addEventListener('contextmenu', function (event) {
 })
 
 function checkForWin() {
-  //These are some losing 'flags' since I don't know how to return and break of nested functions
-  var loseCriteria1 = false;
-  var loseCriteria2 = false;
-
-  //=================================================================================
-  //1. Check if all mines are marked, if not, then player has not won
-  //=================================================================================
-  board.cells.forEach(function (cell) {
-    if (cell.isMine === true && cell.isMarked === false) {
-      loseCriteria1 = true;
-      return;
-    }
-  });
-
-  //=================================================================================
-  //2. Check if all mines are marked and if some non-mine cells are still hidden, if yes, then player has not won
-  //=================================================================================
-  //Filters cells for mines, then returns true if all those mines are marked
-  var allMinesMarked = board.cells.filter(cell => cell.isMine).every(mine => mine.isMarked);
-  //Loops through each cell, tests if all non-mine cells are hidden
-  board.cells.forEach(function (cell) {
-    if (allMinesMarked === true && cell.isMine === false && cell.hidden === true) {
-      loseCriteria2 = true;
-      return;
-    }
+  let playerHasWon = true; //Have to prove this wrong, otherwise player has won
+  board.cells.forEach(cell => {
+    if (cell.isMine && !cell.isMarked) playerHasWon = false; //Player hasn't won if all mines aren't marked
+    if (!cell.isMine && cell.hidden) playerHasWon = false; //Player hasn't won if non-mine cells are still hidden
   })
-
-  if (loseCriteria1 === false && loseCriteria2 === false) lib.displayMessage('You win!'); //winning
+  if (playerHasWon) lib.displayMessage('You win!'); //this remains true through our two tests, so the player has won
 }
 
 // Define this function to count the number of mines around the cell
