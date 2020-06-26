@@ -9,29 +9,26 @@ var size = 3;
 
 function startGame() {
   // Don't remove this function call: it makes the game work!
-  createBoard(false, false, true);
+  createBoard();
   cellCounts();
   lib.initBoard();
-  console.log("==================BEGIN=================")
-  console.log(board.cells);
 }
 
 function restartGame() {
-  board = {cells:[]};
-  //NEED TO CLEAR THE DRAWN CELLS SOMEHOW
-  console.log("==================RESTARTED=================")
+  board.cells = [];
+  console.log(board.cells);
+  lib.initBoard();
+  //NEED TO CLEAR THE DRAWN CELLS SOMEHOW, IT'S CURRENTLY DUPLICATING <===============
   startGame();
 }
 
 function increaseCells() {
-  console.log(`Prev Size:${size}, New Size:${++size}`)
-  console.log(board.cells);
+  size++;
   restartGame();
 }
 
 function decreaseCells() {
-  console.log(`Prev Size:${size}, New Size:${--size}`)
-  console.log(board.cells);
+  size--;
   restartGame();
 }
 
@@ -42,16 +39,16 @@ function cellCounts() {
   }
 }
 
-//Creates board
-function createBoard(isMine, isMarked, hidden) {
+//Creates board with random cells and mines 
+function createBoard() {
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
       let cell = {
         row: i,
         col: j,
-        isMine: Math.random() >= 0.8, //return 20% chance of true
-        isMarked: isMarked,
-        hidden: hidden
+        isMine: Math.random() >= 0.8, //return 20% chance of mine
+        isMarked: false,
+        hidden: true
       };
       board.cells.push(cell);
     }
