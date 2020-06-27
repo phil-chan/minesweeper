@@ -64,7 +64,8 @@ function cellClicks() {
             checkForWin();
         });
         cell.addEventListener('contextmenu', function (event) {
-            flagCellAudio.play();
+            if (cell.classList.contains('marked')) flagCellAudio.play();
+            else unflagCellAudio.play();
             checkForWin();
         })
     })
@@ -77,7 +78,11 @@ function checkForWin() {
         if (cell.isMine && !cell.isMarked) playerHasWon = false; //Player hasn't won if all mines aren't marked
         if (!cell.isMine && cell.hidden) playerHasWon = false; //Player hasn't won if non-mine cells are still hidden
     })
-    if (playerHasWon) lib.displayMessage('You win!');
+    if (playerHasWon) {
+        let winAudio = document.querySelector('#winAudio');
+        winAudio.play();
+        lib.displayMessage('You win!');
+    }
 }
 
 // Define this function to count the number of mines around the cell
