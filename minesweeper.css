@@ -40,13 +40,13 @@ body {
     width: 150px;
     padding: 10px;
     border-radius: 8px;
-    border: 1px #ccc solid;
+    border: 1.5px #ccc solid;
     outline: none;
     font-family: 'Roboto Mono', monospace;
 }
 
 #controls button:hover {
-    background-color: rgb(204, 204, 204);
+    opacity: .66;
 }
 
 #message {
