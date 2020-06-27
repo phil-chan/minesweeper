@@ -5,6 +5,7 @@
     <title>Minesweeper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="minesweeper.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <script src="lib/tests.js"></script>
     <script src="lib/lib.js"></script>
     <link rel="shortcut icon" href="#">
@@ -12,17 +13,18 @@
 </head>
 
 <body>
-    <div id="message">
-    </div>
     <div id="notes">
         <h1>Minesweeper</h1>
-        <h3>You win when all mines are flagged and all other cells have been revealed.</h3>
-        <p> Left click to reveal cell. Right click to flag cell. Bombs spawn at random with at 30% chance.</p>
+
+        <h3>How to play:</h3>
+        <p>You win when all mines are flagged and all other cells have been revealed.</p>
+        <p>Left click to reveal cell. Right click to flag cell. Bombs spawn at random with at 30% chance.</p>
     </div>
+    <div id="message"></div>
     <div id="controls">
-        <button onclick="decreaseCells()">Decrease Board Size</button>
-        <button onclick="increaseCells()">Increase Board Size</button>
-        <button onclick="restartGame()">Reset</button>
+        <button onclick="decreaseCells()">-1 Difficulty</button>
+        <button onclick="increaseCells()">+1 Difficulty</button>
+        <button onclick="restartGame()">Restart Game</button>
     </div>
     <div class="board"></div>
     <audio id="revealSoundAudio" src="sounds/click.wav"></audio>

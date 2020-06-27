@@ -1,7 +1,7 @@
 html,
 body {
     height: 100%;
-    font-family: 'Open Sans', sans-serif
+    font-family: 'Roboto Mono', monospace;
 }
 
 body {
@@ -16,9 +16,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 10px;
 }
 
 #notes>h1 {
+    text-decoration: underline;
+    margin: 5px;
+}
+
+#notes>h3 {
     margin: 5px;
 }
 
@@ -35,7 +41,8 @@ body {
     padding: 10px;
     border-radius: 8px;
     border: 1px #ccc solid;
-    outline: none
+    outline: none;
+    font-family: 'Roboto Mono', monospace;
 }
 
 #controls button:hover {
@@ -43,7 +50,13 @@ body {
 }
 
 #message {
-    font-size: 1.5rem;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+#message p{
+    margin: 0;
 }
 
 .board {
