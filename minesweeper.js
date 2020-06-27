@@ -8,6 +8,7 @@ function startGame() {
     createBoard(size);
     cellCounts();
     lib.initBoard(); // Don't remove this function call: it makes the game work!
+    cellClicks();
 }
 
 //Restarts the game by clearing the board object and board div class, then calling startGame()
@@ -50,15 +51,25 @@ function createBoard(size) {
     }
 }
 
-// Check left click
-document.addEventListener('click', function (event) {
-    if (event.which === 1) checkForWin();
-})
+function cellClicks() {
+    let cells = document.querySelectorAll(".board > div")
+    let revealCellAudio = document.querySelector('#revealSoundAudio');
+    let flagCellAudio = document.querySelector('#flagSoundAudio');
+    let revealBombAudio = document.querySelector('#revealBombAudio');
+    cells.forEach(cell => {
+        cell.addEventListener("click", function () {
+            console.log(cell);
+            if (cell.classList.contains('mine')) revealBombAudio.play();
+            else revealCellAudio.play();
+            checkForWin();
+        });
+        cell.addEventListener('contextmenu', function (event) {
+            flagCellAudio.play();
+            checkForWin();
+        })
+    })
+}
 
-//Check right click
-document.addEventListener('contextmenu', function (event) {
-    checkForWin();
-})
 
 function checkForWin() {
     let playerHasWon = true; //Have to prove this wrong, otherwise player has won
