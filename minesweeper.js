@@ -51,6 +51,7 @@ function createBoard(size) {
     }
 }
 
+//Adds all functions and sounds for left click/right click
 function cellClicks() {
     let cells = document.querySelectorAll(".board > div")
     let revealCellAudio = document.querySelector('#revealSoundAudio');
@@ -58,7 +59,6 @@ function cellClicks() {
     let revealBombAudio = document.querySelector('#revealBombAudio');
     cells.forEach(cell => {
         cell.addEventListener("click", function () {
-            console.log(cell);
             if (cell.classList.contains('mine')) revealBombAudio.play();
             else revealCellAudio.play();
             checkForWin();
