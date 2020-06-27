@@ -42,13 +42,14 @@ function createBoard(size) {
             let cell = {
                 row: i,
                 col: j,
-                isMine: Math.random() >= 0.7, //30% chance of mine
+                isMine: Math.random() >= .66, //33% chance of mine, but does not guarantee one
                 isMarked: false,
                 hidden: true
             };
             board.cells.push(cell);
         }
     }
+    if (board.cells.some(cell => cell.isMine) === false) board.cells[0].isMine = true; //ensures a mine at cell 0, 0
 }
 
 //Adds all functions and sounds for left click/right click
