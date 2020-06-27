@@ -1,60 +1,88 @@
-html, body {
-  height: 100%;
-  font-family: 'Open Sans', sans-serif
+html,
+body {
+    height: 100%;
+    font-family: 'Open Sans', sans-serif
 }
 
 body {
-  display: flex;
-  align-items: center;
-  justify-content: flex-center;
-  flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: flex-center;
+    flex-direction: column;
 }
 
-#message, #notes {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#message,
+#notes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#notes>h1 {
+    margin: 5px;
+}
+
+#notes>p {
+    margin: 5px;
+}
+
+#controls {
+    margin: 10px;
+}
+
+#controls button {
+    width: 150px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px #ccc solid;
+    outline: none
+}
+
+#controls button:hover {
+    background-color: rgb(204, 204, 204);
 }
 
 #message {
-  font-size: 1.5rem;
+    font-size: 1.5rem;
 }
 
 .board {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .board div {
-  color: green;
-  font-size: 2rem;
-  width: 75px;
-  height: 75px;
-  border: 1px #ccc dotted;
-  border-radius: 10%;
-  background-color: white;
-  margin: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    color: green;
+    font-size: 2rem;
+    width: 75px;
+    height: 75px;
+    border: 1px #ccc dotted;
+    border-radius: 10%;
+    background-color: white;
+    margin: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .board div:hover {
-  background-color: white;
+    background-color: white;
 }
 
-div.mine, div.mine:hover {
-  background: no-repeat center/60% url("images/bomb.svg") crimson;
+div.mine,
+div.mine:hover {
+    background: no-repeat center/60% url("images/bomb.svg") crimson;
 }
 
 div.hidden {
-  background: #eee;
+    background: #eee;
 }
 
 div.hidden:hover {
-  background: #ccc;
+    background: #ccc;
 }
 
-div.marked, div.marked:hover {
-  background: no-repeat center/60% url("images/mark.svg") deepskyblue;
+div.marked,
+div.marked:hover {
+    background: no-repeat center/60% url("images/mark.svg") deepskyblue;
 }

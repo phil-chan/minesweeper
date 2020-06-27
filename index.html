@@ -3,6 +3,7 @@
 
 <head>
     <title>Minesweeper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="minesweeper.css">
     <script src="lib/tests.js"></script>
     <script src="lib/lib.js"></script>
@@ -12,14 +13,13 @@
 
 <body>
     <div id="message"></div>
-    <div id="notes">You win when all mines are flagged and all
-        other cells are revealed.</br>Left click to reveal cell. Right click to flag cell.</br>Bombs spawn at random
-        with at
-        30% chance.
+    <div id="notes">
+        <h1>You win when all mines are flagged and all other cells have been revealed.</h1>
+        <p> Left click to reveal cell. Right click to flag cell. Bombs spawn at random with at 30% chance.</p>
     </div>
     <div id="controls">
-        <button onclick="decreaseCells()">less</button>
-        <button onclick="increaseCells()">MORE</button>
+        <button onclick="decreaseCells()">Decrease Board Size</button>
+        <button onclick="increaseCells()">Increase Board Size</button>
         <button onclick="restartGame()">Reset</button>
     </div>
     <div class="board"></div>
